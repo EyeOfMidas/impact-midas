@@ -1,10 +1,10 @@
 ig.module(
-    'plugins.camera'
+    'plugins.midas.camera'
 )
 .requires(
     'impact.impact',
 
-	'plugins.screenshake'
+	'plugins.midas.screenshake'
 )
 .defines(function(){
 PluginCamera = ig.Class.extend({

@@ -1,5 +1,5 @@
 ig.module(
-    'plugins.imageasset'
+    'plugins.midas.imageasset'
 )
 .requires(
     'impact.image'

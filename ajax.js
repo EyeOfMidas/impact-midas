@@ -1,9 +1,9 @@
 ig.module(
-    'plugins.ajax'
+    'plugins.midas.ajax'
 )
 .requires(
     'impact.impact',
-    'plugins.ajaxpromise'
+    'plugins.midas.ajaxpromise'
 )
 .defines(function() {
 

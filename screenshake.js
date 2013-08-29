@@ -1,5 +1,5 @@
 ig.module(
-    'plugins.screenshake'
+    'plugins.midas.screenshake'
 )
 .requires(
     'impact.impact',

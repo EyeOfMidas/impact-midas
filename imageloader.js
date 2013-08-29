@@ -1,10 +1,10 @@
 ig.module(
-    'plugins.imageloader'
+    'plugins.midas.imageloader'
 )
 .requires(
     'impact.impact'
-    ,'plugins.imageasset'
-    ,'plugins.ajaxpromise'
+    ,'plugins.midas.imageasset'
+    ,'plugins.midas.ajaxpromise'
 )
 .defines(function(){
 PluginImageLoader = ig.Class.extend({

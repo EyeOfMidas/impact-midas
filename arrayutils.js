@@ -1,5 +1,5 @@
 ig.module(
-    'plugins.arrayutils'
+    'plugins.midas.arrayutils'
 )
 .requires(
     'impact.impact'

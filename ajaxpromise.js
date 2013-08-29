@@ -1,9 +1,9 @@
 ig.module(
-    'plugins.ajaxpromise'
+    'plugins.midas.ajaxpromise'
 )
 .requires(
     'impact.impact',
-    'plugins.arrayutils'
+    'plugins.midas.arrayutils'
 )
 .defines(function() {
 PluginAjaxPromise = ig.Class.extend({
