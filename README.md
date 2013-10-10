@@ -9,4 +9,5 @@ A collection of handy plugins for impactJS, in various stages of functioning and
 * Draw - a wrapper for some HTML5 canvas drawing operations, similar to Processing
 * ImageLoader - a plugin for loading image assets asyncronously into a Game
 * Screenshake - a plugin to provide screen translations over time to simulate screenshakes
+* Button - very simple button logic for hover and active effects using a 3-image spritesheet (no text)
 
