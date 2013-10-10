@@ -1,5 +1,5 @@
 ig.module(
-	'plugins.draw'
+	'plugins.midas.draw'
 )
 .requires(
 	'impact.impact'
@@ -37,9 +37,12 @@ PluginDraw = function(){
             context.fillStyle = fillColor;
             context.fill();
         }
-        context.strokeStyle = strokeColor;
-        context.lineWidth = lineWidth;
-        context.stroke();
+        
+        if (strokeColor) {
+            context.strokeStyle = strokeColor;
+            context.lineWidth = lineWidth;
+            context.stroke();
+        }
 		this.reset();
     };
 
@@ -56,7 +59,7 @@ PluginDraw = function(){
 	    };
         context.beginPath();
         context.moveTo(startingVector.x, startingVector.y);
-	context.lineTo(endingVector.x, endingVector.y);
+        context.lineTo(endingVector.x, endingVector.y);
 
         context.strokeStyle = strokeColor;
         context.lineWidth = lineWidth;
@@ -66,12 +69,35 @@ PluginDraw = function(){
 
     this.point = function(x, y) {
 		this.line(x, y, x + 1, y + 1);
-    },
+    };
 	this.reset = function() {
+		var context = ig.system.context;
 		this.strokeColor = "#000000";
 		this.lineWidth = 1;
 		this.fillColor = null;
-	}
+		context.strokeStyle = strokeColor;
+		context.fillStyle = fillColor;
+		context.lineWidth = lineWidth;
+		
+	};
+	
+	this.circle = function(centerX, centerY, radius) {
+		var context = ig.system.context;
+		var scale = ig.system.scale;
+		context.beginPath();
+		context.arc(centerX + ig.game.screen.x, centerY + ig.game.screen.y, scale * radius, 0, 2 * Math.PI, false);
+		if (fillColor) {
+            context.fillStyle = fillColor;
+            context.fill();
+        }
+        
+        if (strokeColor) {
+            context.strokeStyle = strokeColor;
+            context.lineWidth = lineWidth;
+            context.stroke();
+        }
+        this.reset();
+	};
 };
 ig.draw = new PluginDraw();
 });

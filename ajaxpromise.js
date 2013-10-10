@@ -13,7 +13,7 @@ PluginAjaxPromise = ig.Class.extend({
     result: null,
     state: 0,
     setResult: function(result) {
-      this.result = result;
+      this.result = result;  
     },
     resolve: function() {
         this.state = PluginAjaxPromise.STATE.FULFILLED;
@@ -26,8 +26,7 @@ PluginAjaxPromise = ig.Class.extend({
         this.isAlways();
     },
     operateOnDelegates: function(callbackCollection) {
-        var arrayUtils = new ArrayUtils();
-        arrayUtils.each(callbackCollection, function(value){
+        ig.arrayUtils.each(callbackCollection, function(value){
             value(this.result);
             }, this);
     },
@@ -59,7 +58,7 @@ PluginAjaxPromise = ig.Class.extend({
             this.alwaysCallbacks.push(newAlwaysCallback);
         } else {
             newAlwaysCallback(this.result);
-        }
+        }   
     }
 });
 PluginAjaxPromise.STATE = {
