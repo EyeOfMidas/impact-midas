@@ -21,6 +21,13 @@ PluginImageLoader = ig.Class.extend({
         };
         asyncImage.src = path;
         return promise;
+    },
+    loadImage: function(path, imageAsset) {
+    	var promise = this.getImage(path);
+    	promise.done(function(result) {
+			imageAsset.init(result);
+		});
+    	return promise;
     }
 });
 });
