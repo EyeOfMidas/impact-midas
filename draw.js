@@ -29,9 +29,13 @@ PluginDraw = function(){
     	}
     	fillColor = newFillColor;    		
     };
+    
+    this.getContext = function() {
+    	return ig.system.context;
+    };
 
     this.rect = function(x, y, width, height) {
-		var context = ig.system.context;
+		var context = this.getContext();
 		var scale = ig.system.scale;
 		var scaledOffsetRect = {
 		    x: scale * x - scale * ig.game.screen.x,
@@ -61,7 +65,7 @@ PluginDraw = function(){
     };
 
     this.line = function(x1, y1, x2, y2) {
-		var context = ig.system.context;
+		var context = this.getContext();
 		var scale = ig.system.scale;
 		var startingVector = {
 			x: scale * x1 - scale * ig.game.screen.x,
@@ -84,7 +88,7 @@ PluginDraw = function(){
 		this.line(x, y, x + 1, y + 1);
     };
 	this.reset = function() {
-		var context = ig.system.context;
+		var context = this.getContext();
 		this.strokeColor = "#000000";
 		this.lineWidth = 1;
 		this.fillColor = null;
@@ -95,10 +99,36 @@ PluginDraw = function(){
 	};
 	
 	this.circle = function(centerX, centerY, radius) {
-		var context = ig.system.context;
+		var context = this.getContext();
 		var scale = ig.system.scale;
 		context.beginPath();
 		context.arc(centerX + ig.game.screen.x, centerY + ig.game.screen.y, scale * radius, 0, 2 * Math.PI, false);
+		if (fillColor) {
+			if(fillDirty) {
+				context.fillStyle = fillColor;
+				fillDirty = false;
+			}
+            context.fill();
+        }
+        
+        if (strokeColor) {
+        	if(strokeDirty) {
+        		context.strokeStyle = strokeColor;
+        		strokeDirty = false;
+        	}
+            context.lineWidth = lineWidth;
+            context.stroke();
+        }
+	};
+	
+	this.poly = function(points) {
+		var context = this.getContext();
+		context.beginPath();
+		context.moveTo(points[0][0], points[0][1]);
+		for(var i = 1; i < points.length; i++) {
+			context.lineTo(points[i][0], points[i][1]);
+		}
+		context.closePath();
 		if (fillColor) {
 			if(fillDirty) {
 				context.fillStyle = fillColor;
