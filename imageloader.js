@@ -10,6 +10,10 @@ ig.module(
 PluginImageLoader = ig.Class.extend({
     getImage: function(path) {
         var promise = new PluginAjaxPromise();
+        if(path == null || path == "") {
+        	promise.reject();
+        	return promise;
+        }
         var asyncImage = new Image();
         asyncImage.onload = function(event) {
             promise.setResult(asyncImage);

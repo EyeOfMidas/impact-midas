@@ -11,6 +11,7 @@ EntityButton = ig.Entity.extend({
     animSheet: null,
     state: 'idle',
     wasPreviouslyPressed: false,
+    wasPreviouslyHovered: false,
     init: function( x, y, settings ) {
         this.parent( x, y, settings );
         this.addAnim( 'idle', 1, [0] );
@@ -22,6 +23,8 @@ EntityButton = ig.Entity.extend({
             var isClicked = ig.input.state('click');
 
             if (this.mouseWithinButton()) {
+            	this.wasPreviouslyHovered = true;
+            	document.body.style.cursor = "pointer";
                 if (isClicked) {
                     this.setState('active');
                     if (this.wasPreviouslyPressed) {
@@ -33,13 +36,18 @@ EntityButton = ig.Entity.extend({
                 } else {
                     this.setState('hover');
                     if (this.wasPreviouslyPressed) {
+                    	document.body.style.cursor = "default";
                         this.onRelease();
                     }
                     this.wasPreviouslyPressed = false;
                 }
             } else {
-                this.setState('idle');
-                this.wasPreviouslyPressed = false;
+            	if(this.wasPreviouslyHovered) {
+            		document.body.style.cursor = "default";
+            		this.setState('idle');
+            		this.wasPreviouslyPressed = false;
+            		this.wasPreviouslyHovered = false;
+            	}
             }
         }
     },
