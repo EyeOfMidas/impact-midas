@@ -4,7 +4,7 @@ ig.module(
 .requires(
 	'impact.impact'
 )
-.defines(function() { "use strict";
+.defines(function() {
 TrueClock = ig.Class.extend({
 	getMilliseconds: function() {
 		var date = new Date();
