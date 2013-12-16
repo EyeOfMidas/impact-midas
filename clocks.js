@@ -38,6 +38,11 @@ TrueStopwatch = ig.Class.extend({
 			this.target = this.clock.getMilliseconds();
 			this.running = false;
 		}
+	},
+	reset: function() {
+		this.base = this.clock.getMilliseconds();
+		this.target = this.base;
+		this.running = false;
 	}
 });
 
@@ -75,6 +80,10 @@ TrueTimer = ig.Class.extend({
 			this.base = this.clock.getMilliseconds();
 			this.running = false;
 		}
+	},
+	reset: function() {
+		this.base = this.clock.getMilliseconds();
+		this.target = this.base;
 	}
 });
 });
