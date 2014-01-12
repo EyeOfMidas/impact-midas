@@ -9,8 +9,10 @@ PluginDraw = function(){
     var strokeColor = "#000000",
     lineWidth = 1,
     fillColor = null,
+    lineCap = null,
     strokeDirty = false,
-    fillDirty = false;
+    fillDirty = false,
+    lineCapDirty = false;
 
     this.setLineWidth = function(newLineWidth) {
     	lineWidth = newLineWidth;
@@ -28,6 +30,13 @@ PluginDraw = function(){
     		fillDirty = true;
     	}
     	fillColor = newFillColor;    		
+    };
+    
+    this.setLineCap = function(newLineCap) {
+    	if(lineCap != newLineCap) {
+    		lineCapDirty = true;
+    	}
+    	lineCap = newLineCap;
     };
     
     this.getContext = function() {
@@ -81,6 +90,10 @@ PluginDraw = function(){
 	
 	    context.strokeStyle = strokeColor;
 	    context.lineWidth = lineWidth;
+	    if(lineCapDirty) {
+	    	context.lineCap = lineCap;
+	    	lineCapDirty = false;
+	    }
 	    context.stroke();
     };
 
