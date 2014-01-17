@@ -30,6 +30,15 @@ EntityDrawnButton = ig.Entity.extend({
         if ( this.state == 'hidden' ) {
         	return;
         }
+        if(this.font != null) {
+        	if(this.size.x < this.font.widthForString(this.text)) {
+        		this.size.x = this.font.widthForString(this.text);
+        	}
+        	if(this.size.y < this.font.heightForString(this.text)) {
+        		this.size.y = this.font.heightForString(this.text);
+        	}
+        }
+
         var isClicked = ig.input.state('click');
 
         if (this.mouseWithinButton()) {
@@ -66,7 +75,9 @@ EntityDrawnButton = ig.Entity.extend({
         ig.draw.setStroke(this.strokeColors[this.state]);
         ig.draw.setFill(this.fillColors[this.state]);
         ig.draw.rect(this.pos.x, this.pos.y, this.size.x, this.size.y);
-		this.font.draw(this.text, this.pos.x + this.size.x / 2, this.pos.y + this.size.y / 2 - this.font.heightForString(this.text) / 2, ig.Font.ALIGN.CENTER);
+        if(this.font != null) {
+        	this.font.draw(this.text, this.pos.x + this.size.x / 2, this.pos.y + this.size.y / 2 - this.font.heightForString(this.text) / 2, ig.Font.ALIGN.CENTER);        	
+        }
         this.parent();
     },
     setState: function( s ) {
