@@ -8,18 +8,20 @@ ig.module(
 TrueClock = ig.Class.extend({
 	getMilliseconds: function() {
 		var date = new Date();
-		return date;
+		return date.getTime();
 	}
 });
 TrueStopwatch = ig.Class.extend({
 	clock: new TrueClock(),
 	base: 0,
 	target: 0,
+	pauseTime: 0, 
 	running: false,
 	init: function() {
 		var milliseconds = this.clock.getMilliseconds();
 		this.base = milliseconds;
 		this.target = milliseconds;
+		this.pauseTime = milliseconds;
 	},
 	start: function() {
 		if(!this.running) {
@@ -32,6 +34,22 @@ TrueStopwatch = ig.Class.extend({
 			return this.clock.getMilliseconds() - this.base;
 		}
 		return this.target - this.base;
+	},
+	pause: function() {
+		if(this.running) {
+			var milliseconds = this.clock.getMilliseconds();
+			this.pauseTime = milliseconds;
+			this.target = milliseconds;
+			this.running = false;
+		}
+	},
+	unpause: function() {
+		if(!this.running) {
+			var milliseconds = this.clock.getMilliseconds();
+			this.base += milliseconds - this.pauseTime;
+			this.pauseTime = milliseconds;
+			this.running = true;			
+		}
 	},
 	stop: function() {
 		if(this.running) {

@@ -31,6 +31,7 @@ EntityDrawnButton = ig.Entity.extend({
         	return;
         }
         if(this.font != null) {
+        	this.font.alpha = 1;
         	if(this.size.x < this.font.widthForString(this.text)) {
         		this.size.x = this.font.widthForString(this.text);
         	}
