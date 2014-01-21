@@ -69,6 +69,7 @@ TrueTimer = ig.Class.extend({
 	base: 0,
 	target: 0,
 	running: false,
+	timerCallback: function(){},
 	init: function() {
 		var milliseconds = this.clock.getMilliseconds();
 		this.base = milliseconds;
@@ -87,6 +88,7 @@ TrueTimer = ig.Class.extend({
 			if(remaining <= 0) {
 				this.running = false;
 				remaining = 0;
+				this.timerCallback();
 			}
 		} else {
 			remaining = this.target - this.base;
@@ -102,6 +104,9 @@ TrueTimer = ig.Class.extend({
 	reset: function() {
 		this.base = this.clock.getMilliseconds();
 		this.target = this.base;
+	},
+	setTimerCallback: function(callback) {
+		this.timerCallback = callback;
 	}
 });
 });
