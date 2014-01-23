@@ -99,6 +99,16 @@ PluginDraw = function(){
 
     this.point = function(x, y) {
 		this.line(x, y, x + 1, y + 1);
+
+		//possible faster implementation if the image data can be moved
+		/*var context = this.getContext();
+		var id = context.createImageData(1,1); // only do this once per page
+		var d  = id.data;                        // only do this once per page
+		d[0]   = r;
+		d[1]   = g;
+		d[2]   = b;
+		d[3]   = a;
+		context.putImageData( id, x, y );*/
     };
 	this.reset = function() {
 		var context = this.getContext();
@@ -114,17 +124,23 @@ PluginDraw = function(){
 	this.circle = function(centerX, centerY, radius) {
 		var context = this.getContext();
 		var scale = ig.system.scale;
-		context.beginPath();
-		context.arc(centerX + ig.game.screen.x, centerY + ig.game.screen.y, scale * radius, 0, 2 * Math.PI, false);
+
 		if (fillColor) {
+        	context.beginPath();
+        	context.arc(centerX + ig.game.screen.x, centerY + ig.game.screen.y, scale * radius, 0, 2 * Math.PI, false);
+        	context.closePath();
 			if(fillDirty) {
 				context.fillStyle = fillColor;
 				fillDirty = false;
 			}
             context.fill();
         }
-        
-        if (strokeColor) {
+
+		if (strokeColor) {
+			var strokeRadius = (radius - (lineWidth / 2));
+		    context.beginPath();
+        	context.arc(centerX + ig.game.screen.x, centerY + ig.game.screen.y, scale * strokeRadius, 0, 2 * Math.PI, false);
+        	context.closePath();
         	if(strokeDirty) {
         		context.strokeStyle = strokeColor;
         		strokeDirty = false;
@@ -142,6 +158,7 @@ PluginDraw = function(){
 			context.lineTo(points[i][0], points[i][1]);
 		}
 		context.closePath();
+
 		if (fillColor) {
 			if(fillDirty) {
 				context.fillStyle = fillColor;
@@ -149,8 +166,8 @@ PluginDraw = function(){
 			}
             context.fill();
         }
-        
-        if (strokeColor) {
+
+		if (strokeColor) {
         	if(strokeDirty) {
         		context.strokeStyle = strokeColor;
         		strokeDirty = false;
