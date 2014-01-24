@@ -115,7 +115,6 @@ PluginAjax = ig.Class.extend({
         for (var key in data) {
             if (data.hasOwnProperty(key)) {
                 var value = data[key];
-                console.log(typeof value);
                 if(typeof value === 'object') {
                 	value = JSON.stringify(value);
                 }
