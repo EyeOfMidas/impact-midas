@@ -6,7 +6,7 @@ ig.module(
 )
 .defines(function() {
 Color = function(r,b,g,a) {
-	this.red;
+	this.red = r;
 	this.green = g;
 	this.blue = b;
 	this.alpha = a;
@@ -37,7 +37,10 @@ PluginDraw = function(){
 
         var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
         if(result) {
-        	var color = new Color(parseInt(result[1], 16), parseInt(result[2], 16),parseInt(result[3], 16), 1);
+        	var red = parseInt(result[1], 16);
+        	var green = parseInt(result[2], 16);
+        	var blue = parseInt(result[3], 16);
+        	var color = new Color(red, green, blue, 1);
         	return color;
         }
     };

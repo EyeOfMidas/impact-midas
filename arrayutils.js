@@ -11,7 +11,7 @@ PluginArrayUtils = function() {
         var index = 0;
         var shuffled = [];
         this.each(obj, function(value) {
-            rand = Math.floor(Math.random() * index)
+            rand = Math.floor(Math.random() * index);
             shuffled[index] = shuffled[rand];
             index++;
             shuffled[rand] = value;
