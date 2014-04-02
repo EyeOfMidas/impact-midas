@@ -5,7 +5,7 @@ ig.module(
 	'impact.impact'
 )
 .defines(function() {
-Color = function(r,b,g,a) {
+Color = function(r,g,b,a) {
 	this.red = r;
 	this.green = g;
 	this.blue = b;
